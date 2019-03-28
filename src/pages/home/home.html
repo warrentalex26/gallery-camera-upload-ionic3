@@ -8,8 +8,22 @@
 
 <ion-content class="background">
 
+  <ion-card>
+    <img src="https://www.eldiario.es/fotos/Foto-Jordi-Sabate_EDIIMA20180212_0316_4.jpg" alt="">
+    <ion-card-content>
+      <ion-card-title>
+        Post 1
+      </ion-card-title>
+    </ion-card-content>
+    <ion-row>
+      <ion-col text-right>
+        <button ion-button clear small color="primary" icon-left=""><ion-icon name="share-alt">Compartir</ion-icon></button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
   <ion-fab bottom right>
-    <button ion-fab color="danger"><ion-icon name="add"></ion-icon></button>
+    <button (click)="mostrar_Modal()" ion-fab color="danger"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
 
 </ion-content>

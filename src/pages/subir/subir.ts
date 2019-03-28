@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage } from 'ionic-angular';
+import { IonicPage, ViewController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -8,7 +8,11 @@ import { IonicPage } from 'ionic-angular';
 })
 export class SubirPage {
 
-  constructor() {
+  constructor(public viewController: ViewController) {
+  }
+
+  cerrar_Modal(){ // para cerrar el modal necesitamos el viewController
+    this.viewController.dismiss(); // cerramos el modal
   }
 
 }
