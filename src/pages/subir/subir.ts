@@ -1,0 +1,14 @@
+import { Component } from '@angular/core';
+import { IonicPage } from 'ionic-angular';
+
+@IonicPage()
+@Component({
+  selector: 'page-subir',
+  templateUrl: 'subir.html',
+})
+export class SubirPage {
+
+  constructor() {
+  }
+
+}
