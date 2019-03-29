@@ -8,11 +8,11 @@
 
 <ion-content class="background">
 
-  <ion-card>
-    <img src="https://www.eldiario.es/fotos/Foto-Jordi-Sabate_EDIIMA20180212_0316_4.jpg" alt="">
+  <ion-card *ngFor="let item of post | async">
+    <img [src]="item.img" alt="">
     <ion-card-content>
       <ion-card-title>
-        Post 1
+        {{item.titulo}}
       </ion-card-title>
     </ion-card-content>
     <ion-row>

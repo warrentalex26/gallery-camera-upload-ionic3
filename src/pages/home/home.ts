@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
 import { SubirPage } from '../subir/subir';
+
+import { AngularFireDatabase } from '@angular/fire/database';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'page-home',
@@ -8,8 +11,12 @@ import { SubirPage } from '../subir/subir';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController,
-              private modalController: ModalController) {
+  post: Observable<any[]>;
+
+  constructor(private modalController: ModalController,
+              private afDB: AngularFireDatabase) {
+
+    this.post = afDB.list('post').valueChanges(); // valueChanges es el observador donde nos podemos suscribir para ver los cambios en tiempo real
 
   }
 
