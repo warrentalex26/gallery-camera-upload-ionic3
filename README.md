@@ -12,8 +12,9 @@ App de subida de imagenes con las caracteristicas:
 * La subida de las imagenes seran guardadas en el storage y base de datos de firebase
 * Compartir foto a facebook
 
-como Backend ocupamos `firebase` la conexion la logramos con [AngularFire2](https://github.com/angular/angularfire2/blob/master/docs/ionic/v3.md) implementado con ionic 3
+Como Backend ocupamos `firebase` la conexion la logramos con [AngularFire2](https://github.com/angular/angularfire2/blob/master/docs/ionic/v3.md) implementado con ionic 3
 
+Creamos un pipe para que el `ion-tittle` del navbar cambie dinamicamente con respecto al titulo de la imagen que estemos ingresando 
 
 
 # Para probarlos en el dispositivo

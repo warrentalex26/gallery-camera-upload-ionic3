@@ -16,6 +16,7 @@ export class HomePage {
   constructor(private modalController: ModalController,
               private afDB: AngularFireDatabase) {
 
+    // @ts-ignore
     this.post = afDB.list('post').valueChanges(); // valueChanges es el observador donde nos podemos suscribir para ver los cambios en tiempo real
 
   }

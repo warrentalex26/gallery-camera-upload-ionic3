@@ -5,7 +5,7 @@
       <button ion-button="" (click)="cerrar_Modal()">Cerrar</button>
     </ion-buttons>
 
-    <ion-title>Crear Post</ion-title>
+    <ion-title>{{titulo | placeholder:'Crear un nuevo post'}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -15,7 +15,7 @@
 
     <ion-item>
       <ion-label floating>Titulo</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="titulo"></ion-input>
     </ion-item>
     
     <ion-item>

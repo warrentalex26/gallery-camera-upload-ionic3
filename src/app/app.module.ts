@@ -9,9 +9,14 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
+//Pipes
+import {PipesModule} from "../pipes/pipes.module";
+
+//Pagina
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { SubirPage } from  '../pages/subir/subir';
+
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDCz0xEwFsZIi0gKEV2kKVrqAxR9qzGUkU",
@@ -33,7 +38,8 @@ export const firebaseConfig = {
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    PipesModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
