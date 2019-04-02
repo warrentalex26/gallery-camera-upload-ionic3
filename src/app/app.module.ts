@@ -20,6 +20,7 @@ import { ImagePicker } from '@ionic-native/image-picker';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { SubirPage } from  '../pages/subir/subir';
+import { CargaArchivoProvider } from '../providers/carga-archivo/carga-archivo';
 
 
 export const firebaseConfig = {
@@ -57,7 +58,8 @@ export const firebaseConfig = {
     AngularFireDatabase,
     Camera,
     ImagePicker,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    CargaArchivoProvider
   ]
 })
 export class AppModule {}
