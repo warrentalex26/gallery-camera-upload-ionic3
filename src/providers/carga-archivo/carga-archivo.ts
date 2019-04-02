@@ -12,11 +12,38 @@ export class CargaArchivoProvider {
 
   constructor(public toastCtrl: ToastController,
               public afDB: AngularFireDatabase) {
-    this.cargarUltimoKey().subscribe(); // Nos suscribimos al observable sino no funcionara
-    console.log('Hello CargaArchivoProvider Provider');
+    // Nos suscribimos al observable sino no funcionara
+    this.cargarUltimoKey().subscribe( () => {
+      //Cuando ya tenga el ultimo kay podra ejecutar 'x' cosa aca adentro
+      this.cargarImagenes();
+    });
+
   }
 
-  cargarUltimoKey(){
+  cargarImagenes(){
+    let promesa = new Promise((resolve, reject) => {
+      this.afDB.list('/post', ref => ref.limitToLast(4).orderByKey().endAt(this.lastKey)) //Obtenemos el nodo de los 'post' con los ultimos 3 elementos, ordenarlos por su llave y que termine en la ultima llave
+        .valueChanges() // Estamos pendientes si hay cambios, esto regresa un observable y nos tenemos que suscribir
+        .subscribe((posts: any) => { // Aca obtenemos todos los registros
+          posts.pop(); // Eliminamos la ultima posicion del arreglo porque nos trae un duplicado de la ultima imagen
+          if (posts.length == 0){ // Quiere decir que ya no hay mas registros
+            console.log("Ya no hay mas registros " + posts);
+            resolve(false); // Ya no hay mas registros
+            return;
+          }
+          //Sino entra al if quiere decir que hay registros
+          this.lastKey = posts[0].key; // Obtenemos el ultimo elemento
+          for (let i = posts.length - 1; i >= 0; i--){ // Insertamos todas las imagenes
+            let post = posts[i];
+            this.imagenes.push(post);
+          }
+          resolve(true);
+        });
+    });
+    return promesa
+  }
+
+  private cargarUltimoKey(){ // Es privada porque solo se llama una unica vez cuando el servicio es inicializado
     return this.afDB.list('/post', ref => ref.orderByKey().limitToLast(1)) //Obtenemos el nodo de los 'post' con el ultimo elemento.
       .valueChanges() // Estamos pendientes si hay cambios
       .map((post:any) => { // Vamos a recibir el ultimo elemento
