@@ -27,4 +27,9 @@
     <button (click)="mostrar_Modal()" ion-fab color="danger"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
 
+  <!--Infinite scroll para cargar mas imagenes-->
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" [enabled]="aunHayMas">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
 </ion-content>

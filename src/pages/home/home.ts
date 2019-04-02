@@ -11,7 +11,7 @@ import { CargaArchivoProvider } from '../../providers/carga-archivo/carga-archiv
   templateUrl: 'home.html'
 })
 export class HomePage {
-
+  aunHayMas:boolean = true; // Bandera para controlar el infinite scroll
   // post: Observable<any[]>;
 
   constructor(private modalController: ModalController,
@@ -25,6 +25,18 @@ export class HomePage {
   mostrar_Modal(){ // Para mostrar el modal necesitamos el modalController y la pagina que queremos mostrar como modal
     let modal = this.modalController.create(SubirPage);
     modal.present() // Mostramos el modal
+  }
+
+  doInfinite(infiniteScroll) {
+    console.log('Begin async operation');
+      //Nos suscribimos a la promesa para ocupar el infinite scroll
+      this.cargaArchivoProvider.cargarImagenes().then((hayMas:boolean) => {
+        console.log(hayMas);
+        this.aunHayMas = hayMas; // con esto le decimos que aunhaymas que es falso porque llego al final y lo controlamos desde el HTML con la propiedad [enabled]
+        infiniteScroll.complete()
+      });
+
+
   }
 
 }

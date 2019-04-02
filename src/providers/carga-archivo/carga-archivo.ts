@@ -22,7 +22,7 @@ export class CargaArchivoProvider {
 
   cargarImagenes(){
     let promesa = new Promise((resolve, reject) => {
-      this.afDB.list('/post', ref => ref.limitToLast(4).orderByKey().endAt(this.lastKey)) //Obtenemos el nodo de los 'post' con los ultimos 3 elementos, ordenarlos por su llave y que termine en la ultima llave
+      this.afDB.list('/post', ref => ref.limitToLast(3).orderByKey().endAt(this.lastKey)) //Obtenemos el nodo de los 'post' con los ultimos 3 elementos, ordenarlos por su llave y que termine en la ultima llave
         .valueChanges() // Estamos pendientes si hay cambios, esto regresa un observable y nos tenemos que suscribir
         .subscribe((posts: any) => { // Aca obtenemos todos los registros
           posts.pop(); // Eliminamos la ultima posicion del arreglo porque nos trae un duplicado de la ultima imagen
