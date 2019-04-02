@@ -11,11 +11,14 @@ App de subida de imagenes con las caracteristicas:
 * Autenticación con facebook
 * La subida de las imagenes seran guardadas en el storage y base de datos de firebase
 * Compartir foto a facebook
+* Usamos el componente InfiniteScroll de la API en la documentación de ionic
 
 Como Backend ocupamos `firebase` la conexion la logramos con [AngularFire2](https://github.com/angular/angularfire2/blob/master/docs/ionic/v3.md) implementado con ionic 3
 
 Creamos un pipe para que el `ion-tittle` del navbar cambie dinamicamente con respecto al titulo de la imagen que estemos ingresando 
 
+`Si les manda error(No deberia) verificar en el package.json la version del rxjs
+dede ser la "rxjs": "6.0.0"`
 
 # Para probarlos en el dispositivo
 

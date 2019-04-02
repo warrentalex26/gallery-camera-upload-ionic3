@@ -15,6 +15,7 @@ import {PipesModule} from "../pipes/pipes.module";
 //Plugins
 import { Camera } from '@ionic-native/camera';
 import { ImagePicker } from '@ionic-native/image-picker';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 //Pagina
 import { MyApp } from './app.component';
@@ -58,6 +59,7 @@ export const firebaseConfig = {
     AngularFireDatabase,
     Camera,
     ImagePicker,
+    SocialSharing,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CargaArchivoProvider
   ]
