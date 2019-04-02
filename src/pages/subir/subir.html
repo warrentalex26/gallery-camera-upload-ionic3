@@ -1,11 +1,11 @@
 <ion-header>
   <ion-navbar>
 
-    <ion-buttons>
+    <ion-buttons start>
       <button ion-button="" (click)="cerrar_Modal()">Cerrar</button>
     </ion-buttons>
 
-    <ion-title>{{titulo | placeholder:'Crear un nuevo post'}}</ion-title>
+    <ion-title text-center="">{{titulo | placeholder:'Crear un nuevo post'}}</ion-title>
 
     <ion-buttons end>
       <button [disabled]="!titulo || !imagePreview" ion-button="" (click)="crearPost()">Crear Post</button>

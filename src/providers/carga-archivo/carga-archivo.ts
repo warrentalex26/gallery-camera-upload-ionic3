@@ -2,15 +2,29 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from "angularfire2/database";
 import * as firebase from 'firebase';
 import { ToastController } from 'ionic-angular';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class CargaArchivoProvider {
 
-  imagenes: ArchivoSubir[] = [];
+  imagenes: ArchivoSubir[] = []; // El arreglo de imagenes para no leerlo directamente de firebase
+  lastKey: string = null; // Con esta propiedad controlamos el ultimo elemento que se inserto en firebase
 
   constructor(public toastCtrl: ToastController,
               public afDB: AngularFireDatabase) {
+    this.cargarUltimoKey().subscribe(); // Nos suscribimos al observable sino no funcionara
     console.log('Hello CargaArchivoProvider Provider');
+  }
+
+  cargarUltimoKey(){
+    return this.afDB.list('/post', ref => ref.orderByKey().limitToLast(1)) //Obtenemos el nodo de los 'post' con el ultimo elemento.
+      .valueChanges() // Estamos pendientes si hay cambios
+      .map((post:any) => { // Vamos a recibir el ultimo elemento
+        console.log(post);
+        this.lastKey = post[0].key; // Arreglo con el ultimo id es decir el nodo que esta en los post
+        this.imagenes.push(post[0]); // Lo insertamos en el arreglo de imagenes
+      });
+
   }
 
   cargarImagenFirebase(archivo: ArchivoSubir){ // Pasamos el "archivo" que es la imagen a subir de tipo ArchivoSubir para que tengamos las propiedades y sea mas especifico
@@ -35,12 +49,12 @@ export class CargaArchivoProvider {
                             },
         () => { // CUANDO SALE BIEN!!!
                     console.log('ARCHIVO SUBIDO');
-                    this.mostrarToast('Imagen cargada correctamente');
-                    uploadTask.snapshot.ref.getDownloadURL().then(urlImage => { // guardamos en la BD
-                      this.crearPost(archivo.titulo, urlImage, nombreArchivo);
-                      this.mostrarToast('URL: ' + urlImage)
+                    this.mostrarToast('Imagen cargada correctamente'); // ACA SABEMOS QUE LA IMAGEN DE CARGO
+                    uploadTask.snapshot.ref.getDownloadURL().then(urlImage => { // ACA obtenemos el URL
+                      this.crearPost(archivo.titulo, urlImage, nombreArchivo); // Creamos el post mandando los parametros necesarios
+                      this.mostrarToast('URL: ' + urlImage) // Llamamos el toast
                     }).catch(error => {
-                      console.log(error);
+                      console.log(error); // Si sucede un error
                     });
 
                     resolve();
@@ -51,17 +65,17 @@ export class CargaArchivoProvider {
   }
 
   private crearPost(titulo: string, url: string, nombreArchivo:string){ //BD
-    let post : ArchivoSubir = {
-        img: url,
-        titulo: titulo,
-        key: nombreArchivo
+    let post : ArchivoSubir = { // Esto será lo que insertaremos a firebase
+        img: url, // la url de la imagen que le vamos a pasar
+        titulo: titulo, // el titulo de la imagen
+        key: nombreArchivo //La llave sera el nombre del archivo
     };
     
     console.log(JSON.stringify(post));
 
-    // this.afDB.list('/post').push(post)
-    this.afDB.object(`/post/${nombreArchivo}`).update(post); // Guardarlo en la BD
-    this.imagenes.push(post); //Actualizamos la BD
+    // this.afDB.list('/post').push(post) // SE PUEDE HACER ASI PERO NODO DEL JSON NO ES PERSONALIZABLE
+    this.afDB.object(`/post/${nombreArchivo}`).update(post); // creamos en la BD como el nodo "post" y luego cada elemento sera el nombre del archivo que contendra la imagen
+    this.imagenes.push(post); //Actualizamos el arreglo de imagenes
 
   }
 

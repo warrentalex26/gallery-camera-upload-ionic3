@@ -11,8 +11,8 @@ import { CargaArchivoProvider } from "../../providers/carga-archivo/carga-archiv
 })
 export class SubirPage {
 
-  titulo: string = "";
-  imagePreview: string = "";
+  titulo: string = ""; // Con las comillas controlamos el crear post con [Disabled]
+  imagePreview: string = ""; // Con las comillas controlamos el crear post con [Disabled]
   imagen64: string;
 
   constructor(public viewController: ViewController,
@@ -68,7 +68,7 @@ export class SubirPage {
       titulo: this.titulo
     };
     this.cargaArchivoProvider.cargarImagenFirebase(archivo).then(() =>{
-      this.cerrar_Modal();
+      this.cerrar_Modal(); // Cerrar modal una vez se suba el archivo a firebase(Storage y BD)
     })
 
   }

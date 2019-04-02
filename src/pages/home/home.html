@@ -8,7 +8,8 @@
 
 <ion-content class="background">
 
-  <ion-card *ngFor="let item of post | async">
+  <!--cargaArchivoProvider.imagenes se encuentra en el contructor pero las imagenes vienen del servicio-->
+  <ion-card *ngFor="let item of cargaArchivoProvider.imagenes">
     <img [src]="item.img" alt="">
     <ion-card-content>
       <ion-card-title>

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { ModalController } from 'ionic-angular';
 import { SubirPage } from '../subir/subir';
+import { CargaArchivoProvider } from '../../providers/carga-archivo/carga-archivo'
 
-import { AngularFireDatabase } from '@angular/fire/database';
-import { Observable } from 'rxjs/Observable';
+// import { AngularFireDatabase } from '@angular/fire/database';
+// import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'page-home',
@@ -11,13 +12,13 @@ import { Observable } from 'rxjs/Observable';
 })
 export class HomePage {
 
-  post: Observable<any[]>;
+  // post: Observable<any[]>;
 
   constructor(private modalController: ModalController,
-              private afDB: AngularFireDatabase) {
+              private cargaArchivoProvider: CargaArchivoProvider) {
 
     // @ts-ignore
-    this.post = afDB.list('post').valueChanges(); // valueChanges es el observador donde nos podemos suscribir para ver los cambios en tiempo real
+    // this.post = afDB.list('post').valueChanges(); // valueChanges es el observador donde nos podemos suscribir para ver los cambios en tiempo real
 
   }
 
