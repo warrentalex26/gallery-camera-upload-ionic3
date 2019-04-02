@@ -18,8 +18,8 @@
       <ion-input type="text" [(ngModel)]="titulo"></ion-input>
     </ion-item>
     
-    <ion-item>
-      <img src="https://www.eldiario.es/fotos/Foto-Jordi-Sabate_EDIIMA20180212_0316_4.jpg" alt="">
+    <ion-item *ngIf="imagePreview">
+      <img [src]="imagePreview" alt="">
     </ion-item>
 
   </ion-list>
@@ -27,10 +27,10 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <button ion-button block icon-left><ion-icon name="photos"></ion-icon>Seleccionar</button>
+        <button (click)="seleccionarFoto()" ion-button block icon-left><ion-icon name="photos"></ion-icon>Seleccionar</button>
       </ion-col>
       <ion-col>
-        <button ion-button block icon-left><ion-icon name="camera"></ion-icon>Camara</button>
+        <button (click)="mostrarCamara()" ion-button block icon-left><ion-icon name="camera"></ion-icon>Camara</button>
       </ion-col>
     </ion-row>
   </ion-grid>

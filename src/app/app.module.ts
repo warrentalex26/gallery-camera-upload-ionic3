@@ -12,6 +12,10 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 //Pipes
 import {PipesModule} from "../pipes/pipes.module";
 
+//Plugins
+import { Camera } from '@ionic-native/camera';
+import { ImagePicker } from '@ionic-native/image-picker';
+
 //Pagina
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -51,6 +55,8 @@ export const firebaseConfig = {
     StatusBar,
     SplashScreen,
     AngularFireDatabase,
+    Camera,
+    ImagePicker,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
