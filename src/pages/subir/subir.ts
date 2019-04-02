@@ -11,9 +11,9 @@ import { CargaArchivoProvider } from "../../providers/carga-archivo/carga-archiv
 })
 export class SubirPage {
 
-  titulo: string;
-  imagePreview: string;
-  imagen64: string
+  titulo: string = "";
+  imagePreview: string = "";
+  imagen64: string;
 
   constructor(public viewController: ViewController,
               private camera: Camera,
@@ -67,7 +67,10 @@ export class SubirPage {
       img: this.imagen64, //Es la imagen en base 64
       titulo: this.titulo
     };
-    this.cargaArchivoProvider.cargarImagenFirebase(archivo);
+    this.cargaArchivoProvider.cargarImagenFirebase(archivo).then(() =>{
+      this.cerrar_Modal();
+    })
+
   }
 
 }
